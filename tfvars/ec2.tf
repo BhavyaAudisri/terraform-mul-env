@@ -1,12 +1,12 @@
 resource "aws_instance" "expense" {
-  count = length(var.instances)
+  count                  = length(var.instances)
   ami                    = "ami-09c813fb71547fc4f" # This is our devops-practice AMI ID
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   instance_type          = "t3.micro"
   tags = merge(
     var.common_tags,
     {
-        Name = "${var.project}-${var.environment}-${var.instances[count.index]}" # expense-dev-mysql
+      Name = "${var.project}-${var.environment}-${var.instances[count.index]}" # expense-dev-mysql
     }
   )
 }
@@ -33,3 +33,4 @@ resource "aws_security_group" "allow_tls" {
     Name = "${var.project}-${var.environment}"
   }
 }
+
